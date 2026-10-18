@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicolás Vergesio · data & bio</title>
+<meta name="description" content="Bioinformático y analista de datos. Edición Halloween.">
+<link rel="canonical" href="https://nicolasvergesio.github.io/">
+<meta name="theme-color" content="#050705">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="js/thunder.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050705;
+    --void-2: #0A0F0A;
+    --panel: #0B110B;
+    --panel-2: #111A10;
+    --slime: #5CFF2E;
+    --slime-deep: #2FB81A;
+    --slime-soft: #A8FF7A;
+    --toxic: #B45CFF;
+    --pumpkin: #FF7A1A;
+    --ink: #EAF7E4;
+    --ink-soft: #B7C9B0;
+    --ink-mute: #6E806A;
+    --line: rgba(92, 255, 46, 0.12);
+    --line-strong: rgba(92, 255, 46, 0.28);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --wobble: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --display: 'Creepster', 'Space Grotesk', cursive;
+    --pixel: 'VT323', ui-monospace, monospace;
+    --drip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='60' viewBox='0 0 300 60'%3E%3Cpath fill='%235CFF2E' d='M0,0 H300 V8 C280,8 278,10 276,22 C274,34 266,34 264,22 C262,10 250,8 230,8 C200,8 196,12 195,30 C194,48 182,48 181,30 C180,12 170,8 150,8 C120,8 112,10 111,16 C110,22 104,22 103,16 C102,10 90,8 70,8 C50,8 44,12 43,40 C42,56 30,56 29,40 C28,12 20,8 0,8 Z'/%3E%3C/svg%3E");
+    --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='10'%3E%3Cpath d='M0 5 Q6 0 12 5 T24 5' fill='none' stroke='%23B45CFF' stroke-width='2'/%3E%3C/svg%3E");
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+  ::selection { background: var(--slime); color: var(--void); }
+  a { color: inherit; text-decoration: none; }
+
+  /* ================= FONDO RADIOACTIVO ================= */
+  .ooze-field {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden;
+    background:
+      radial-gradient(ellipse 45% 40% at 80% 28%, rgba(92,255,46,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 35% at 12% 85%, rgba(180,92,255,0.10) 0%, transparent 60%),
+      linear-gradient(165deg, var(--void) 0%, var(--void-2) 55%, #070B07 100%);
+  }
+  .ooze {
+    position: absolute; width: 170%; height: 170%; top: -35%; left: -35%;
+    border-radius: 45%; mix-blend-mode: screen; will-change: transform; opacity: 0.16;
+  }
+  .ooze.a { background: radial-gradient(ellipse 40% 34% at 50% 50%, rgba(92,255,46,0.45) 0%, transparent 60%); animation: drift-a 48s linear infinite; }
+  .ooze.b { background: radial-gradient(ellipse 36% 30% at 50% 50%, rgba(180,92,255,0.40) 0%, transparent 58%); animation: drift-b 64s linear infinite; }
+  .ooze.c { background: radial-gradient(ellipse 30% 38% at 50% 50%, rgba(47,184,26,0.40) 0%, transparent 56%); animation: drift-c 80s linear infinite; }
+  @keyframes drift-a { 0%{transform:translate(0,0) rotate(0)} 50%{transform:translate(10%,7%) rotate(180deg)} 100%{transform:translate(0,0) rotate(360deg)} }
+  @keyframes drift-b { 0%{transform:translate(0,0) rotate(0)} 50%{transform:translate(-12%,8%) rotate(-180deg)} 100%{transform:translate(0,0) rotate(-360deg)} }
+  @keyframes drift-c { 0%{transform:translate(0,0) rotate(0)} 50%{transform:translate(9%,-10%) rotate(160deg)} 100%{transform:translate(0,0) rotate(360deg)} }
+
+  /* burbujas que suben */
+  .bubbles span {
+    position: absolute; bottom: -40px; left: var(--x);
+    width: var(--s); height: var(--s); border-radius: 50%;
+    border: 1.5px solid rgba(92,255,46,0.35);
+    background: radial-gradient(circle at 30% 30%, rgba(168,255,122,0.25), transparent 60%);
+    animation: bubble var(--d) ease-in infinite; animation-delay: var(--delay);
+  }
+  @keyframes bubble {
+    0% { transform: translate(0,0); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translate(12px,-50vh); }
+    100% { transform: translate(-8px,-110vh); opacity: 0; }
+  }
+
+  .crt { position: fixed; inset: 0; z-index: 2; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px); opacity: 0.45; }
+  .vignette { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse 90% 80% at 50% 40%, transparent 55%, rgba(0,0,0,0.7) 100%); }
+
+  /* ================= NAV ================= */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 18px 40px; display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s var(--ease), padding 0.4s var(--ease);
+  }
+  .nav::after {
+    content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 22px;
+    background: var(--drip) repeat-x; background-size: 220px 22px;
+    opacity: 0; transform: scaleY(0); transform-origin: top;
+    transition: opacity 0.4s var(--ease), transform 0.6s var(--wobble);
+    pointer-events: none; filter: drop-shadow(0 0 6px rgba(92,255,46,0.4));
+  }
+  .nav.scrolled { background: var(--slime); padding: 10px 40px; }
+  .nav.scrolled::after { opacity: 1; transform: scaleY(1); }
+  .nav.scrolled .nav-brand, .nav.scrolled .nav-links a { color: var(--void); }
+  .nav.scrolled .nav-links a.nav-cake { color: #3A0F66; }
+  .nav.scrolled .nav-brand .dot { color: #3A0F66; }
+  .nav.scrolled .nav-codon rect.f { fill: var(--void); }
+  .nav.scrolled .lang-toggle { border-color: var(--void); color: var(--void); }
+  .nav.scrolled .lang-toggle .on { color: #3A0F66; }
+
+  .nav-brand { font-family: var(--display); font-size: 22px; letter-spacing: 0.06em; color: var(--slime); display: flex; align-items: center; gap: 10px; transition: color 0.3s; }
+  .nav-brand .nav-codon { width: 26px; height: 26px; display: block; flex-shrink: 0; }
+  .nav-brand .nav-codon svg { width: 100%; height: 100%; display: block; }
+  .nav-brand .dot { color: var(--toxic); }
+  .nav-right { display: flex; align-items: center; gap: 26px; }
+  .nav-links { display: flex; gap: 24px; font-family: var(--pixel); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav-links a { color: var(--ink-mute); transition: color 0.3s var(--ease); }
+  .nav-links a:hover { color: var(--slime-soft); }
+  .nav.scrolled .nav-links a:hover { color: #3A0F66; }
+  .nav-links a.nav-cake { color: var(--toxic); }
+
+  .lang-toggle {
+    font-family: var(--pixel); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--ink-soft); background: transparent; border: 1.5px solid var(--line-strong);
+    border-radius: 14px 20px 12px 18px; padding: 2px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center;
+    transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  .lang-toggle:hover { border-color: var(--slime); color: var(--ink); }
+  .lang-toggle .on { color: var(--slime); }
+  .lang-toggle .sep { color: var(--ink-mute); }
+
+  /* Botón para volver al sitio normal */
+  .nav-tools { display: flex; align-items: center; gap: 10px; }
+  .mode-toggle {
+    width: 30px; height: 30px; border: 1.5px solid var(--line-strong); border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%;
+    display: inline-flex; align-items: center; justify-content: center; color: var(--ink-mute);
+    transition: border-color 0.3s var(--ease), color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .mode-toggle svg { width: 17px; height: 17px; display: block; }
+  .mode-toggle:hover, .mode-toggle:focus-visible { color: var(--slime); border-color: var(--slime); box-shadow: 0 0 14px rgba(92,255,46,0.35); }
+  .nav.scrolled .mode-toggle { border-color: var(--void); color: var(--void); }
+  .nav.scrolled .mode-toggle:hover { color: #3A0F66; box-shadow: none; }
+
+  /* ================= LAYOUT ================= */
+  section { position: relative; z-index: 10; scroll-margin-top: 70px; }
+  .container { max-width: 1160px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
+
+  .drip-band {
+    position: relative; z-index: 10; height: 46px;
+    background: var(--drip) repeat-x; background-size: 300px 46px;
+    filter: drop-shadow(0 0 10px rgba(92,255,46,0.35));
+  }
+  .drip-band.purple { filter: hue-rotate(150deg) saturate(1.2) drop-shadow(0 0 10px rgba(180,92,255,0.35)); background-position: 120px 0; }
+
+  .sec-head { margin-bottom: 46px; }
+  .sec-eyebrow {
+    font-family: var(--pixel); font-size: 17px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--slime); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .sec-eyebrow::after { content: ''; width: 120px; height: 10px; background: var(--squiggle) repeat-x; }
+  .sec-title {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(34px, 5vw, 60px); line-height: 1; letter-spacing: 0.02em; color: var(--slime);
+    text-shadow: 0 0 22px rgba(92,255,46,0.35), 3px 3px 0 #123D0A;
+  }
+  .sec-title em { font-style: normal; color: var(--toxic); text-shadow: 0 0 22px rgba(180,92,255,0.4), 3px 3px 0 #2A0B4A; }
+
+  .reveal { opacity: 0; transform: translateY(28px) rotate(-0.6deg); transition: opacity 0.9s var(--ease), transform 0.9s var(--wobble); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ================= HERO ================= */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 40px 90px; max-width: 1160px; margin: 0 auto; position: relative; z-index: 10;
+  }
+  .hero-eyebrow { font-family: var(--pixel); font-size: 19px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--toxic); margin-bottom: 22px; opacity: 0; animation: rise 1.1s var(--ease) 0.2s forwards; }
+  .hero-eyebrow .rad { color: var(--slime); display: inline-block; animation: spin 6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero-mark { width: clamp(56px, 6vw, 72px); height: clamp(70px, 8vw, 92px); margin-bottom: 22px; opacity: 0; animation: rise 1.1s var(--ease) 0.12s forwards; }
+  .hero-mark svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .hero-mark .fill { filter: drop-shadow(0 0 12px rgba(92,255,46,0.7)); }
+
+  .hero-name-row { display: flex; align-items: flex-end; gap: 22px; flex-wrap: wrap; position: relative; }
+  .hero-name-wrap { position: relative; }
+  .hero-name {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(52px, 10vw, 120px); line-height: 0.88; letter-spacing: 0.02em;
+    color: var(--slime);
+    text-shadow: 0 0 30px rgba(92,255,46,0.45), 0 0 80px rgba(92,255,46,0.2), 5px 5px 0 #0F3A08;
+    opacity: 0; animation: rise 1.1s var(--ease) 0.32s forwards, glow 4s ease-in-out 1.5s infinite;
+  }
+  .hero-name em { font-style: normal; display: block; color: var(--slime-soft); }
+  @keyframes glow { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.18); } }
+
+  .drop {
+    position: absolute; top: 96%; left: var(--x);
+    width: 9px; height: 12px; background: var(--slime);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 0 10px rgba(92,255,46,0.8);
+    opacity: 0; animation: drip-fall var(--d) ease-in var(--delay) infinite;
+  }
+  @keyframes drip-fall {
+    0% { transform: translateY(-6px) scale(0.2); opacity: 0; }
+    15% { transform: translateY(0) scale(1); opacity: 1; }
+    45% { transform: translateY(6px) scale(0.85, 1.35); opacity: 1; }
+    100% { transform: translateY(220px) scale(0.8, 1.2); opacity: 0; }
+  }
+
+  .hero-wave { margin-bottom: clamp(14px, 2vw, 26px); opacity: 0; animation: rise 1.1s var(--ease) 0.6s forwards; }
+  .hero-wave svg { display: block; width: clamp(64px, 9vw, 104px); height: auto; filter: drop-shadow(0 0 6px rgba(180,92,255,0.7)); }
+  .hero-wave path { stroke: var(--toxic); }
+
+  .hero-bio { font-size: clamp(18px, 2.2vw, 23px); line-height: 1.5; color: var(--ink-soft); max-width: 580px; margin-top: 40px; opacity: 0; animation: rise 1.1s var(--ease) 0.5s forwards; }
+  .hero-bio em { font-style: normal; color: var(--slime); font-weight: 500; }
+  .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 40px; flex-wrap: wrap; opacity: 0; animation: rise 1.1s var(--ease) 0.68s forwards; }
+
+  .btn-signal {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--slime); color: var(--void);
+    font-family: var(--pixel); font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 8px 22px 9px;
+    border-radius: 12px 20px 10px 18px / 18px 10px 20px 12px;
+    box-shadow: 0 0 26px rgba(92,255,46,0.35), 5px 5px 0 var(--toxic);
+    transition: transform 0.35s var(--wobble), box-shadow 0.35s var(--ease);
+  }
+  .btn-signal:hover { transform: translate(-2px,-2px) rotate(-1.5deg); box-shadow: 0 0 40px rgba(92,255,46,0.5), 8px 8px 0 var(--toxic); }
+  .btn-ghost { font-family: var(--pixel); font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 9px; transition: color 0.3s var(--ease), gap 0.3s var(--ease); }
+  .btn-ghost:hover { color: var(--slime-soft); gap: 14px; }
+
+  .hero-socials { display: flex; gap: 12px; margin-top: 40px; opacity: 0; animation: rise 1.1s var(--ease) 0.8s forwards; }
+  .hero-socials a { width: 38px; height: 38px; border: 1.5px solid var(--line-strong); border-radius: 46% 54% 50% 50% / 55% 45% 55% 45%; display: flex; align-items: center; justify-content: center; color: var(--ink-mute); transition: all 0.35s var(--wobble); }
+  .hero-socials a:hover { border-color: var(--slime); color: var(--slime); transform: translateY(-3px) rotate(8deg); box-shadow: 0 0 16px rgba(92,255,46,0.35); }
+  .hero-socials svg { width: 16px; height: 16px; }
+
+  .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-family: var(--pixel); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0; animation: rise 1.1s var(--ease) 1s forwards; }
+  .scroll-hint .track { width: 2px; height: 34px; background: linear-gradient(var(--ink-mute), transparent); position: relative; overflow: hidden; border-radius: 2px; }
+  .scroll-hint .track::after { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 12px; background: var(--slime); animation: scroll-run 2.2s var(--ease) infinite; }
+  @keyframes scroll-run { 0%{transform:translateY(-14px);opacity:0} 40%{opacity:1} 100%{transform:translateY(36px);opacity:0} }
+  @keyframes rise { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ================= SOBRE ================= */
+  .sobre { padding: 70px 0 80px; }
+  .sobre .sec-head { margin-bottom: 32px; }
+  .sobre-grid { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: stretch; }
+  .sobre-photo {
+    min-height: 340px; overflow: hidden; border: 2px solid var(--line-strong);
+    border-radius: 22px 38px 18px 44px / 36px 20px 42px 18px;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(92,255,46,0.14), transparent 60%),
+      linear-gradient(160deg, var(--panel-2), var(--void));
+    display: flex; align-items: center; justify-content: center; position: relative;
+    transform: rotate(-1.5deg);
+    box-shadow: 8px 8px 0 rgba(180,92,255,0.35);
+  }
+  .sobre-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .sobre-photo-ph { text-align: center; color: var(--ink-mute); }
+  .sobre-photo-ph svg { width: 30px; height: 30px; opacity: 0.5; margin-bottom: 8px; }
+  /* ---- Foto raspable (igual que el sitio normal, con colores Halloween) ---- */
+  .scratch {
+    aspect-ratio: 1 / 1; min-height: 0; align-self: start; justify-self: start; width: 100%; max-width: 300px;
+    user-select: none; -webkit-user-select: none;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%235CFF2E' fill-opacity='.25' stroke='%235CFF2E' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%235CFF2E'/%3E%3C/svg%3E") 16 16, crosshair;
+  }
+  .scratch-photo, .scratch-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .scratch-photo { object-fit: cover; }
+  .scratch:not(.ready) .scratch-photo { visibility: hidden; }
+  .scratch-canvas { touch-action: none; transition: opacity 0.9s var(--ease); }
+  .scratch.revealed .scratch-canvas { opacity: 0; pointer-events: none; }
+  .scratch.revealed { cursor: default; }
+  .scratch-hint {
+    position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+    font-family: var(--pixel); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--void); background: var(--slime); padding: 3px 14px; border-radius: 16px 20px 14px 22px; white-space: nowrap;
+    pointer-events: none; box-shadow: 0 6px 24px rgba(92,255,46,0.35);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    animation: hint-pulse 2.4s var(--ease) infinite;
+  }
+  .scratch.started .scratch-hint { opacity: 0; transform: translateX(-50%) translateY(8px); animation: none; }
+  @keyframes hint-pulse { 0%,100% { box-shadow: 0 6px 24px rgba(92,255,46,0.35); } 50% { box-shadow: 0 6px 34px rgba(92,255,46,0.65); } }
+  .scratch-reset {
+    position: absolute; right: 12px; bottom: 12px;
+    font-family: var(--pixel); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink); background: rgba(5,7,5,0.75); backdrop-filter: blur(6px);
+    border: 1.5px solid var(--line-strong); border-radius: 16px; padding: 2px 12px; cursor: pointer;
+    transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  .scratch-reset:hover { border-color: var(--slime); color: var(--slime); }
+  .sobre-photo-ph div { font-family: var(--pixel); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .sobre-body p { font-size: clamp(16px, 1.6vw, 18.5px); line-height: 1.65; color: var(--ink-soft); }
+  .sobre-body p + p { margin-top: 16px; }
+  .sobre-body em { font-style: normal; color: var(--slime); font-weight: 500; }
+  .sobre-funfact { margin-top: 28px !important; padding: 16px 20px; border: 1.5px dashed rgba(180,92,255,0.5); border-radius: 14px 22px 12px 20px; font-size: clamp(15px, 1.5vw, 16.5px) !important; color: var(--ink-mute) !important; background: rgba(180,92,255,0.05); }
+  .sobre-funfact span { display: block; font-family: var(--pixel); font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--toxic); margin-bottom: 4px; }
+
+  /* ================= SERVICIOS ================= */
+  .servicios { padding: 100px 0; }
+  .serv-list { border-top: 1.5px solid var(--line); }
+  .serv-item { border-bottom: 1.5px solid var(--line); }
+  .serv-head { display: grid; grid-template-columns: 60px 1fr auto; gap: 32px; align-items: center; padding: 28px 0; cursor: pointer; transition: padding-left 0.4s var(--wobble); }
+  .serv-head:hover { padding-left: 14px; }
+  .serv-num { font-family: var(--pixel); font-size: 19px; color: var(--ink-mute); transition: color 0.3s var(--ease); }
+  .serv-item.open .serv-num, .serv-head:hover .serv-num { color: var(--slime); }
+  .serv-title { font-family: var(--display); font-size: clamp(21px, 2.6vw, 30px); font-weight: 400; letter-spacing: 0.03em; line-height: 1.1; color: var(--ink); transition: color 0.3s, text-shadow 0.3s; }
+  .serv-item.open .serv-title, .serv-head:hover .serv-title { color: var(--slime); text-shadow: 0 0 18px rgba(92,255,46,0.35); }
+  .serv-toggle { font-family: var(--pixel); font-size: 27px; color: var(--toxic); width: 28px; text-align: right; transition: transform 0.45s var(--wobble); }
+  .serv-item.open .serv-toggle { transform: rotate(45deg); }
+  .serv-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease), padding 0.4s var(--ease); }
+  .serv-item.open .serv-body { max-height: 380px; opacity: 1; padding-bottom: 34px; }
+  .serv-body-inner { display: grid; grid-template-columns: 60px 1fr; gap: 32px; }
+  .serv-desc { color: var(--ink-soft); font-size: 15.5px; line-height: 1.65; max-width: 640px; }
+  .serv-desc em { color: var(--slime); font-style: normal; font-weight: 500; }
+  .serv-tags { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .serv-tag { font-family: var(--pixel); font-size: 14px; letter-spacing: 0.04em; color: var(--slime-soft); border: 1.5px solid var(--line-strong); padding: 0 12px 1px; border-radius: 12px 16px 10px 18px; background: rgba(92,255,46,0.04); }
+
+  /* ================= PORTFOLIO ================= */
+  .portfolio { padding: 100px 0; }
+  .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .proj-card {
+    background: var(--panel); border: 1.5px solid var(--line-strong);
+    border-radius: 16px 24px 14px 22px / 22px 14px 24px 16px;
+    overflow: hidden; display: flex; flex-direction: column; position: relative;
+    transition: transform 0.45s var(--wobble), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .proj-card:hover { transform: translateY(-6px) rotate(-1deg); border-color: var(--slime); box-shadow: 0 0 34px rgba(92,255,46,0.18), 6px 6px 0 var(--toxic); }
+  .proj-card:nth-child(even):hover { transform: translateY(-6px) rotate(1deg); }
+  .proj-thumb { aspect-ratio: 16/10; border-bottom: 1.5px solid var(--line); position: relative; overflow: hidden; background: var(--void); }
+  .proj-thumb svg { width: 100%; height: 100%; display: block; }
+  .proj-thumb::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 18px; background: var(--drip) repeat-x; background-size: 180px 18px; transform: translateY(-100%); transition: transform 0.6s var(--wobble); }
+  .proj-card:hover .proj-thumb::after { transform: translateY(0); }
+  .proj-arrow { position: absolute; bottom: 12px; right: 12px; width: 32px; height: 32px; background: var(--slime); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--void); font-size: 14px; font-weight: 600; opacity: 0; transform: scale(0.4); transition: all 0.4s var(--wobble); }
+  .proj-card:hover .proj-arrow { opacity: 1; transform: scale(1); }
+  .proj-body { padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .proj-meta { display: flex; justify-content: space-between; font-family: var(--pixel); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); }
+  .proj-meta .cat { color: var(--toxic); }
+  .proj-title { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; margin-top: 2px; color: var(--ink); }
+  .proj-title em { font-style: normal; color: var(--slime); }
+  .proj-desc { font-size: 13.5px; line-height: 1.55; color: var(--ink-mute); }
+  .proj-stack { margin-top: auto; padding-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .proj-stack span { font-family: var(--pixel); font-size: 15px; color: var(--slime); }
+
+  /* ================= CAKEFORMATICS ================= */
+  .cake { padding: 110px 0; }
+  .cake-panel {
+    border: 2px solid rgba(180,92,255,0.45);
+    border-radius: 26px 40px 22px 46px / 40px 24px 46px 22px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(ellipse 50% 80% at 88% 20%, rgba(180,92,255,0.22), transparent 55%),
+      radial-gradient(ellipse 40% 60% at 5% 100%, rgba(92,255,46,0.12), transparent 60%),
+      linear-gradient(150deg, var(--panel-2), var(--void));
+    padding: 62px 52px 52px;
+    display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+    box-shadow: 10px 10px 0 rgba(92,255,46,0.25);
+  }
+  .cake-panel::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 30px; background: var(--drip) repeat-x; background-size: 240px 30px; filter: hue-rotate(150deg) saturate(1.2); }
+  .cake-tag { font-family: var(--pixel); font-size: 17px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slime); margin-bottom: 10px; }
+  .cake-title { font-family: var(--display); font-size: clamp(34px, 4.6vw, 54px); font-weight: 400; letter-spacing: 0.03em; line-height: 1; margin-bottom: 18px; color: var(--toxic); text-shadow: 0 0 24px rgba(180,92,255,0.45), 4px 4px 0 #2A0B4A; }
+  .cake-title em { font-style: normal; color: var(--slime); text-shadow: 0 0 24px rgba(92,255,46,0.4), 4px 4px 0 #0F3A08; }
+  .cake-desc { font-size: 17px; line-height: 1.6; color: var(--ink-soft); max-width: 520px; }
+  .cake-desc em { font-style: normal; color: var(--slime); font-weight: 500; }
+  .cake-cta-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .cake-mark svg { width: 76px; height: 76px; animation: bob 3s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
+
+  /* ================= TRAYECTORIA ================= */
+  .tray { padding: 100px 0; }
+  .tray-download-wrap { margin-bottom: 48px; }
+  .tray-item { display: grid; grid-template-columns: 150px 1fr; gap: 40px; padding: 28px 0; border-top: 1.5px solid var(--line); }
+  .tray-item:last-child { border-bottom: 1.5px solid var(--line); }
+  .tray-date { font-family: var(--pixel); font-size: 17px; color: var(--slime); line-height: 1.2; padding-top: 2px; }
+  .tray-date .end { color: var(--ink-mute); display: block; }
+  .tray-role { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; }
+  .tray-role em { font-style: normal; color: var(--slime); }
+  .tray-org { font-family: var(--pixel); font-size: 15px; letter-spacing: 0.03em; color: var(--toxic); margin-bottom: 12px; }
+  .tray-bullets { list-style: none; }
+  .tray-bullets li { padding: 5px 0 5px 24px; position: relative; font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+  .tray-bullets li::before { content: ''; position: absolute; left: 4px; top: 11px; width: 8px; height: 10px; background: var(--slime); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; box-shadow: 0 0 8px rgba(92,255,46,0.6); }
+  .tray-edu { margin-top: 36px; display: grid; grid-template-columns: 150px 1fr; gap: 40px; padding-top: 28px; border-top: 1.5px solid var(--line); }
+  .tray-edu-list { display: flex; flex-direction: column; gap: 16px; }
+  .tray-edu-item { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+  .tray-edu-title { font-size: 16px; font-weight: 500; }
+  .tray-edu-year { font-family: var(--pixel); font-size: 15px; color: var(--ink-mute); white-space: nowrap; }
+
+  /* ================= CONTACTO ================= */
+  .contacto { padding: 90px 0 60px; }
+  .contacto-inner { padding-top: 40px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center; }
+  .contacto-headline { font-family: var(--display); font-size: clamp(32px, 4.8vw, 58px); line-height: 1.02; letter-spacing: 0.02em; font-weight: 400; color: var(--ink); }
+  .contacto-headline em { font-style: normal; color: var(--slime); text-shadow: 0 0 26px rgba(92,255,46,0.4), 4px 4px 0 #0F3A08; }
+  .contacto-links { display: flex; flex-direction: column; gap: 4px; }
+  .contacto-link { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1.5px solid var(--line); font-family: var(--pixel); font-size: 19px; letter-spacing: 0.06em; color: var(--ink-soft); transition: all 0.35s var(--wobble); }
+  .contacto-link:hover { color: var(--slime); padding-left: 10px; }
+  .contacto-link .arr { color: var(--toxic); }
+  .footer-meta { margin-top: 80px; padding-top: 24px; border-top: 1.5px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--pixel); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+  .footer-meta .boo { color: var(--toxic); }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 900px) {
+    .sobre-grid { grid-template-columns: 1fr; gap: 36px; }
+    .sobre-photo { max-width: 260px; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .cake-panel { grid-template-columns: 1fr; gap: 28px; padding: 58px 28px 36px; }
+    .contacto-inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (min-width: 901px) and (max-width: 1080px) {
+    .proj-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .nav, .nav.scrolled { padding: 12px 16px; }
+    .nav-links { display: none; }
+    .container { padding-left: 16px; padding-right: 16px; }
+    .hero { padding: 100px 16px 90px; }
+    .scroll-hint { display: none; }
+    .serv-head { grid-template-columns: 40px 1fr 28px; gap: 16px; }
+    .serv-body-inner { grid-template-columns: 1fr; gap: 0; }
+    .tray-item { grid-template-columns: 1fr; gap: 8px; }
+    .tray-edu { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .ooze, .bubbles, .drop { display: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    [class*="hero-"] { opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== FONDO ===== -->
+  <div class="ooze-field" aria-hidden="true">
+    <div class="ooze a"></div>
+    <div class="ooze b"></div>
+    <div class="ooze c"></div>
+    <div class="bubbles">
+      <span style="--x:6%;--s:14px;--d:16s;--delay:0s"></span>
+      <span style="--x:18%;--s:8px;--d:12s;--delay:4s"></span>
+      <span style="--x:33%;--s:20px;--d:20s;--delay:2s"></span>
+      <span style="--x:52%;--s:10px;--d:14s;--delay:7s"></span>
+      <span style="--x:67%;--s:16px;--d:18s;--delay:1s"></span>
+      <span style="--x:79%;--s:7px;--d:11s;--delay:5s"></span>
+      <span style="--x:90%;--s:22px;--d:22s;--delay:3s"></span>
+    </div>
+  </div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="crt" aria-hidden="true"></div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-brand">
+      <span class="nav-codon" aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none">
+          <rect x="8" y="40" width="18" height="18" fill="none" stroke="currentColor" stroke-width="5"/>
+          <rect x="33" y="40" width="18" height="18" fill="none" stroke="currentColor" stroke-width="5"/>
+          <rect class="f" x="58" y="40" width="18" height="18" fill="#B45CFF"/>
+        </svg>
+      </span>
+      NV<span class="dot">.</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#sobre" data-i18n="nav_sobre">Sobre</a>
+        <a href="#servicios" data-i18n="nav_serv">Servicios</a>
+        <a href="#portfolio" data-i18n="nav_port">Portfolio</a>
+        <a href="#cakeformatics" class="nav-cake">Cakeformatics</a>
+        <a href="#trayectoria" data-i18n="nav_tray">Trayectoria</a>
+        <a href="#contacto" data-i18n="nav_cont">Contacto</a>
+      </div>
+      <div class="nav-tools">
+        <a href="index.html" class="mode-toggle" data-thunder="#5CFF2E" aria-label="Volver al sitio normal" title="Volver al sitio normal">
+          <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <rect x="8" y="40" width="18" height="18" stroke="currentColor" stroke-width="7"/>
+            <rect x="33" y="40" width="18" height="18" stroke="currentColor" stroke-width="7"/>
+            <rect x="58" y="40" width="18" height="18" fill="currentColor"/>
+          </svg>
+        </a>
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">
+          <span data-l="es" class="on">ES</span><span class="sep">/</span><span data-l="en">EN</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="hero">
+    <div class="hero-mark" aria-hidden="true">
+      <svg viewBox="0 0 100 130" fill="none">
+        <rect x="6" y="40" width="20" height="20" fill="none" stroke="#EAF7E4" stroke-width="3.5"/>
+        <rect x="33" y="40" width="20" height="20" fill="none" stroke="#EAF7E4" stroke-width="3.5"/>
+        <path class="fill" fill="#5CFF2E" d="M60 40 H80 V60 H76 C75 60 74.5 62 74.5 72 C74.5 80 69.5 80 69.5 72 C69.5 64 69 60 67 60 C65.5 60 65 62 65 66 C65 70 62 70 62 66 C62 62 61.5 60 60 60 Z"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">data &amp; bio <span class="rad">☣</span> edición halloween</div>
+    <div class="hero-name-row">
+      <div class="hero-name-wrap">
+        <h1 class="hero-name">Nicolás <em>Vergesio</em></h1>
+        <span class="drop" style="--x:8%;--d:3.4s;--delay:1.6s" aria-hidden="true"></span>
+        <span class="drop" style="--x:31%;--d:4.2s;--delay:2.8s" aria-hidden="true"></span>
+        <span class="drop" style="--x:58%;--d:3.8s;--delay:2.1s" aria-hidden="true"></span>
+        <span class="drop" style="--x:84%;--d:4.6s;--delay:3.5s" aria-hidden="true"></span>
+      </div>
+      <div class="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 120 26" fill="none">
+          <path d="M2 13 L30 13 L37 4 L45 22 L52 13 L84 13 L90 8 L96 18 L102 13 L118 13" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <p class="hero-bio" data-i18n="hero_bio">
+      Soy bioinformático y analista de datos. Trabajo buscando patrones y ordenando aquellos datos que nadie se atreve a tocar. <em>El resultado: problemas transformados en información accionable.</em>
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-signal" data-i18n="btn_write">Escribir <span>→</span></a>
+      <a href="#portfolio" class="btn-ghost" data-i18n="btn_port">Ver portfolio <span>→</span></a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://www.linkedin.com/in/nicol%C3%A1s-vergesio" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.790v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.690-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+      <a href="https://github.com/NicolasVergesio" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.3.72-4-1.6-4-1.6-.54-1.37-1.33-1.74-1.33-1.74-1.08-.73.08-.72.08-.72 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.46-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.02-.32 3.31 1.23a11.5 11.5 0 0 1 6.02 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.3c0 .31.2.69.83.57A12 12 0 0 0 12 .3"/></svg></a>
+      <a href="mailto:nicolas.vergesio@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l9 6 9-6M3 6h18v12H3z"/></svg></a>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>scroll</span>
+      <div class="track"></div>
+    </div>
+  </header>
+
+  <div class="drip-band" aria-hidden="true"></div>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow" data-i18n="sobre_eyebrow">/ Sobre</div>
+        <h2 class="sec-title" data-i18n="sobre_title">Un poco de <em>contexto</em></h2>
+      </div>
+      <div class="sobre-grid">
+        <div class="sobre-photo scratch reveal" id="scratch">
+          <img class="scratch-photo" src="assets/img/foto.jpg" alt="Foto de Nicolás Vergesio" width="800" height="800">
+          <canvas class="scratch-canvas" aria-hidden="true"></canvas>
+          <div class="scratch-hint" aria-hidden="true"><span data-i18n="scratch_hint">Raspá para ver la foto</span></div>
+          <button class="scratch-reset" type="button" data-i18n="scratch_reset" hidden>↺ Volver a tapar</button>
+        </div>
+        <div class="sobre-body reveal">
+          <p data-i18n="sobre_p1">Ayudo a personas a <em>comprender y analizar su información</em>, además de automatizar sus reportes. A lo largo de mi carrera trabajé como analista de datos y bioinformático: limpiando, integrando y dándole forma a fuentes dispersas.</p>
+          <p data-i18n="sobre_p2">Me interesa el cruce entre biología, código y preguntas bien formuladas. Lo mejor que hago es tomar un problema, descifrarlo y dejarlo en un estado donde se pueda tomar la mejor decisión posible con la información obtenida. A veces eso es un dashboard, a veces un pipeline, a veces una app. <em>No importa el problema: al final todo se resuelve.</em></p>
+          <p class="sobre-funfact" data-i18n="sobre_fun"><span>Fun fact</span> Fuera de los datos, compongo música. Dos oficios que en el fondo hacen lo mismo: trabajar con secuencias y buscarles sentido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICIOS ===== -->
+  <section class="servicios" id="servicios">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow" data-i18n="serv_eyebrow">/ Servicios</div>
+        <h2 class="sec-title" data-i18n="serv_title">Cómo puedo <em>ayudar</em></h2>
+      </div>
+      <div class="serv-list reveal">
+
+        <div class="serv-item">
+          <div class="serv-head" onclick="toggleServ(this)">
+            <div class="serv-num">/ 01</div>
+            <div class="serv-title" data-i18n="s1_title">Análisis de datos y reportes</div>
+            <div class="serv-toggle">+</div>
+          </div>
+          <div class="serv-body"><div class="serv-body-inner"><div></div><div data-i18n="s1_body">
+            <p class="serv-desc">Tomar datos sucios, fuentes dispersas y preguntas vagas, y dejarlas <em>en un estado donde la gerencia pueda tomar las mejores decisiones accionables</em>. Desde un análisis exploratorio hasta un dashboard productivo que se actualiza solo.</p>
+            <div class="serv-tags"><span class="serv-tag">Limpieza y ETL</span><span class="serv-tag">Dashboards</span><span class="serv-tag">Reportes automáticos</span><span class="serv-tag">Visualización</span></div>
+          </div></div></div>
+        </div>
+
+        <div class="serv-item">
+          <div class="serv-head" onclick="toggleServ(this)">
+            <div class="serv-num">/ 02</div>
+            <div class="serv-title" data-i18n="s2_title">Automatizaciones</div>
+            <div class="serv-toggle">+</div>
+          </div>
+          <div class="serv-body"><div class="serv-body-inner"><div></div><div data-i18n="s2_body">
+            <p class="serv-desc">Procesos manuales que se podrían correr solos. Scripts que reemplazan planillas. ETLs que integran lo disperso. <em>Lo aburrido bien hecho</em>, para que el tiempo se gaste en pensar y no en copiar y pegar.</p>
+            <div class="serv-tags"><span class="serv-tag">ETL</span><span class="serv-tag">Apps internas</span><span class="serv-tag">Extracción de datos</span><span class="serv-tag">QC automatizado</span></div>
+          </div></div></div>
+        </div>
+
+        <div class="serv-item">
+          <div class="serv-head" onclick="toggleServ(this)">
+            <div class="serv-num">/ 03</div>
+            <div class="serv-title" data-i18n="s3_title">Bioinformática y ciencia</div>
+            <div class="serv-toggle">+</div>
+          </div>
+          <div class="serv-body"><div class="serv-body-inner"><div></div><div data-i18n="s3_body">
+            <p class="serv-desc">Ayudo a equipos científicos a analizar sus datos, mejorar la reproducibilidad, automatizar sus pipelines y elevar la calidad de sus gráficos. También doy talleres de programación para análisis de datos. Me especializo en el cruce entre <em>investigación, producto y análisis</em>.</p>
+            <div class="serv-tags"><span class="serv-tag">Pipelines reproducibles</span><span class="serv-tag">Análisis estadístico</span><span class="serv-tag">Figuras para papers</span><span class="serv-tag">Talleres</span></div>
+          </div></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO ===== -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">/ Portfolio</div>
+        <h2 class="sec-title" data-i18n="port_title">Proyectos <em>seleccionados</em></h2>
+      </div>
+      <div class="proj-grid reveal">
+
+        <!-- P1 -->
+        <a href="#" class="proj-card">
+          <div class="proj-thumb">
+            <svg viewBox="0 0 400 250"><rect width="400" height="250" fill="#0A0F0A"/><rect x="40" y="100" width="60" height="50" fill="none" stroke="#B7C9B0" stroke-width="1.5"/><rect x="140" y="80" width="60" height="50" fill="none" stroke="#B7C9B0" stroke-width="1.5"/><rect x="240" y="100" width="60" height="50" fill="#5CFF2E"/><rect x="320" y="80" width="40" height="90" fill="none" stroke="#B45CFF" stroke-width="1.5"/><line x1="100" y1="125" x2="140" y2="105" stroke="#6E806A" stroke-width="0.75" stroke-dasharray="2 3"/><line x1="200" y1="105" x2="240" y2="125" stroke="#6E806A" stroke-width="0.75" stroke-dasharray="2 3"/><line x1="300" y1="125" x2="320" y2="125" stroke="#5CFF2E" stroke-width="1"/><g transform="translate(322,84)"><rect x="0" y="0" width="9" height="9" fill="#B45CFF" opacity="0.3"/><rect x="9" y="0" width="9" height="9" fill="#B45CFF" opacity="0.6"/><rect x="18" y="0" width="9" height="9" fill="#B45CFF" opacity="0.4"/><rect x="27" y="0" width="9" height="9" fill="#B45CFF" opacity="0.8"/><rect x="0" y="9" width="9" height="9" fill="#5CFF2E" opacity="0.6"/><rect x="9" y="9" width="9" height="9" fill="#5CFF2E" opacity="0.9"/><rect x="18" y="9" width="9" height="9" fill="#5CFF2E" opacity="0.4"/><rect x="27" y="9" width="9" height="9" fill="#5CFF2E" opacity="0.7"/></g></svg>
+            <div class="proj-arrow">↗</div>
+          </div>
+          <div class="proj-body" data-i18n="p1">
+            <div class="proj-meta"><span class="cat">Bioinformática</span><span>2025</span></div>
+            <h3 class="proj-title">Paquete R para <em>especificidad tisular</em></h3>
+            <p class="proj-desc">Herramienta para analizar y visualizar patrones de expresión génica específicos por tejido, empacada como paquete reproducible.</p>
+            <div class="proj-stack"><span>R</span><span>tidyverse</span><span>ggplot2</span></div>
+          </div>
+        </a>
+
+        <!-- P2 -->
+        <a href="#" class="proj-card">
+          <div class="proj-thumb">
+            <svg viewBox="0 0 400 250"><rect width="400" height="250" fill="#0A0F0A"/><g transform="translate(40,60)"><line x1="0" y1="130" x2="320" y2="130" stroke="#B7C9B0" stroke-width="0.75"/><line x1="0" y1="0" x2="0" y2="130" stroke="#B7C9B0" stroke-width="0.75"/><rect x="20" y="80" width="28" height="50" fill="#B7C9B0" opacity="0.4"/><rect x="60" y="50" width="28" height="80" fill="#B45CFF" opacity="0.7"/><rect x="100" y="65" width="28" height="65" fill="#B7C9B0" opacity="0.4"/><rect x="140" y="30" width="28" height="100" fill="#5CFF2E"/><rect x="180" y="45" width="28" height="85" fill="#B7C9B0" opacity="0.4"/><rect x="220" y="20" width="28" height="110" fill="#5CFF2E"/><rect x="260" y="55" width="28" height="75" fill="#B45CFF" opacity="0.7"/><path d="M 34 105 L 74 90 L 114 97 L 154 80 L 194 87 L 234 75 L 274 92" fill="none" stroke="#A8FF7A" stroke-width="1" stroke-dasharray="3 3" opacity="0.8"/></g></svg>
+            <div class="proj-arrow">↗</div>
+          </div>
+          <div class="proj-body" data-i18n="p2">
+            <div class="proj-meta"><span class="cat">Dashboards</span><span>2024</span></div>
+            <h3 class="proj-title">Reporte mensual <em>automatizado</em></h3>
+            <p class="proj-desc">Pipeline que centraliza datos de múltiples sectores y entrega el reporte del CEO regional el primer día hábil del mes, sin tocar Excel.</p>
+            <div class="proj-stack"><span>R</span><span>SQL</span><span>Power BI</span></div>
+          </div>
+        </a>
+
+        <!-- P3 -->
+        <a href="#" class="proj-card">
+          <div class="proj-thumb">
+            <svg viewBox="0 0 400 250"><rect width="400" height="250" fill="#0A0F0A"/><rect x="80" y="40" width="240" height="170" rx="10" fill="#050705" stroke="#B7C9B0" stroke-width="1.5"/><path d="M80 50 Q80 40 90 40 H310 Q320 40 320 50 V62 H80 Z" fill="#5CFF2E"/><circle cx="94" cy="51" r="2.5" fill="#050705"/><circle cx="102" cy="51" r="2.5" fill="#050705" opacity="0.4"/><circle cx="110" cy="51" r="2.5" fill="#050705" opacity="0.4"/><rect x="100" y="80" width="200" height="14" rx="4" fill="none" stroke="#6E806A" stroke-width="0.75"/><rect x="100" y="105" width="200" height="14" rx="4" fill="none" stroke="#6E806A" stroke-width="0.75"/><rect x="100" y="130" width="200" height="14" rx="4" fill="none" stroke="#6E806A" stroke-width="0.75"/><text x="200" y="184" text-anchor="middle" font-family="Creepster, cursive" font-size="30" fill="#5CFF2E">+ 24%</text><text x="200" y="200" text-anchor="middle" font-family="VT323, monospace" font-size="11" letter-spacing="1" fill="#B45CFF">ROI ESTIMADO</text></svg>
+            <div class="proj-arrow">↗</div>
+          </div>
+          <div class="proj-body" data-i18n="p3">
+            <div class="proj-meta"><span class="cat">Power Apps</span><span>2024</span></div>
+            <h3 class="proj-title">Calculadora de <em>rendimiento &amp; ROI</em></h3>
+            <p class="proj-desc">App interna para que el equipo comercial calcule rendimientos en tiempo real durante la negociación con el cliente.</p>
+            <div class="proj-stack"><span>Power Apps</span><span>SharePoint</span></div>
+          </div>
+        </a>
+
+        <!-- P4 -->
+        <a href="#" class="proj-card">
+          <div class="proj-thumb">
+            <svg viewBox="0 0 400 250"><rect width="400" height="250" fill="#0A0F0A"/><rect x="40" y="40" width="80" height="170" rx="6" fill="#B45CFF" opacity="0.85"/><rect x="52" y="60" width="56" height="6" fill="#050705" opacity="0.6"/><rect x="52" y="74" width="40" height="4" fill="#050705" opacity="0.35"/><rect x="52" y="84" width="46" height="4" fill="#050705" opacity="0.35"/><line x1="52" y1="120" x2="108" y2="120" stroke="#050705" stroke-width="0.75" opacity="0.4"/><circle cx="80" cy="120" r="4" fill="#050705"/><rect x="140" y="40" width="220" height="170" rx="6" fill="#050705" stroke="#1C2A1A" stroke-width="1"/><g fill="#5CFF2E"><circle cx="180" cy="160" r="3"/><circle cx="200" cy="145" r="3"/><circle cx="220" cy="155" r="3"/><circle cx="240" cy="130" r="3"/><circle cx="260" cy="120" r="3"/><circle cx="280" cy="100" r="3"/><circle cx="300" cy="110" r="3"/><circle cx="320" cy="85" r="3"/><circle cx="340" cy="75" r="3"/></g><g fill="#B7C9B0" opacity="0.5"><circle cx="190" cy="180" r="3"/><circle cx="210" cy="175" r="3"/><circle cx="230" cy="170" r="3"/><circle cx="250" cy="165" r="3"/><circle cx="270" cy="155" r="3"/><circle cx="290" cy="160" r="3"/><circle cx="310" cy="145" r="3"/></g><line x1="170" y1="180" x2="350" y2="80" stroke="#A8FF7A" stroke-width="0.75" stroke-dasharray="2 3" opacity="0.5"/></svg>
+            <div class="proj-arrow">↗</div>
+          </div>
+          <div class="proj-body" data-i18n="p4">
+            <div class="proj-meta"><span class="cat">Shiny app</span><span>2025</span></div>
+            <h3 class="proj-title">Visualizador <em>interactivo</em> de bioprocesos</h3>
+            <p class="proj-desc">App Shiny para explorar resultados experimentales de optimización de medios de cultivo, con filtros y exportación.</p>
+            <div class="proj-stack"><span>R</span><span>Shiny</span><span>plotly</span></div>
+          </div>
+        </a>
+
+        <!-- P5 -->
+        <a href="#" class="proj-card">
+          <div class="proj-thumb">
+            <svg viewBox="0 0 400 250"><rect width="400" height="250" fill="#0A0F0A"/><rect x="60" y="40" width="130" height="170" rx="6" fill="#050705" stroke="#B7C9B0" stroke-width="1"/><line x1="75" y1="60" x2="175" y2="60" stroke="#6E806A" stroke-width="0.75"/><line x1="75" y1="72" x2="160" y2="72" stroke="#6E806A" stroke-width="0.75"/><line x1="75" y1="84" x2="170" y2="84" stroke="#6E806A" stroke-width="0.75"/><line x1="75" y1="96" x2="150" y2="96" stroke="#6E806A" stroke-width="0.75"/><rect x="75" y="115" width="100" height="60" rx="6" fill="none" stroke="#5CFF2E" stroke-width="1" stroke-dasharray="3 3"/><text x="125" y="151" text-anchor="middle" font-family="VT323, monospace" font-size="16" fill="#5CFF2E">$ 1,247.50</text><line x1="200" y1="125" x2="240" y2="125" stroke="#B45CFF" stroke-width="1.5"/><polygon points="244,125 236,121 236,129" fill="#B45CFF"/><rect x="250" y="80" width="110" height="90" rx="6" fill="#050705" stroke="#B7C9B0" stroke-width="1"/><line x1="250" y1="100" x2="360" y2="100" stroke="#B7C9B0" stroke-width="0.5"/><line x1="305" y1="80" x2="305" y2="170" stroke="#B7C9B0" stroke-width="0.5"/><line x1="250" y1="120" x2="360" y2="120" stroke="#1C2A1A" stroke-width="0.5"/><line x1="250" y1="140" x2="360" y2="140" stroke="#1C2A1A" stroke-width="0.5"/></svg>
+            <div class="proj-arrow">↗</div>
+          </div>
+          <div class="proj-body" data-i18n="p5">
+            <div class="proj-meta"><span class="cat">Automatización</span><span>2024</span></div>
+            <h3 class="proj-title">Extracción <em>automatizada</em> de facturas</h3>
+            <p class="proj-desc">Aplicación que extrae datos de facturas en PDF y los carga a una base de datos. Reduce carga administrativa y errores de tipeo.</p>
+            <div class="proj-stack"><span>Python</span><span>OCR</span><span>Power Automate</span></div>
+          </div>
+        </a>
+
+        <!-- P6 -->
+        <a href="#" class="proj-card">
+          <div class="proj-thumb">
+            <svg viewBox="0 0 400 250"><rect width="400" height="250" fill="#0A0F0A"/><path d="M 80 180 L 120 140 L 150 180 L 190 120 L 225 155 L 265 100 L 295 145 L 330 110" fill="none" stroke="#B7C9B0" stroke-width="1.5" opacity="0.4"/><circle cx="80" cy="180" r="10" fill="#B45CFF" opacity="0.7"/><circle cx="120" cy="140" r="10" fill="#5CFF2E"/><circle cx="150" cy="180" r="10" fill="#B45CFF" opacity="0.7"/><circle cx="190" cy="120" r="10" fill="#B45CFF" opacity="0.7"/><circle cx="225" cy="155" r="10" fill="#5CFF2E"/><circle cx="265" cy="100" r="10" fill="#B45CFF" opacity="0.7"/><circle cx="295" cy="145" r="10" fill="#B45CFF" opacity="0.7"/><circle cx="330" cy="110" r="10" fill="#5CFF2E"/><circle cx="225" cy="155" r="20" fill="none" stroke="#5CFF2E" stroke-width="0.75" stroke-dasharray="2 3" opacity="0.8"/></svg>
+            <div class="proj-arrow">↗</div>
+          </div>
+          <div class="proj-body" data-i18n="p6">
+            <div class="proj-meta"><span class="cat">Doctorado</span><span>2025–hoy</span></div>
+            <h3 class="proj-title">Pipelines de <em>bioinformática estructural</em></h3>
+            <p class="proj-desc">Procesamiento reproducible de datos genómicos a gran escala para investigación sobre estructura y función de proteínas.</p>
+            <div class="proj-stack"><span>Python</span><span>R</span><span>Docker</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAKEFORMATICS ===== -->
+  <section class="cake" id="cakeformatics">
+    <div class="container">
+      <div class="cake-panel reveal">
+        <div>
+          <div class="cake-tag" data-i18n="cake_tag">/ Proyecto paralelo</div>
+          <h2 class="cake-title">Cake<em>formatics</em></h2>
+          <p class="cake-desc" data-i18n="cake_desc">Mi espacio para divulgar bioinformática y análisis de datos sin solemnidades. Tutoriales, apuntes y experimentos donde explico lo que voy aprendiendo <em>como me hubiera gustado que me lo expliquen</em>. En construcción, creciendo de a poco.</p>
+        </div>
+        <div class="cake-cta-wrap">
+          <div class="cake-mark" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <rect x="18" y="41" width="18" height="18" fill="none" stroke="#B45CFF" stroke-width="3.5"/>
+              <rect x="41" y="41" width="18" height="18" fill="none" stroke="#B45CFF" stroke-width="3.5"/>
+              <rect x="64" y="41" width="18" height="18" fill="#5CFF2E"/>
+            </svg>
+          </div>
+          <a href="#" class="btn-signal" data-i18n="cake_btn">Visitar Cakeformatics <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRAYECTORIA ===== -->
+  <section class="tray" id="trayectoria">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow" data-i18n="tray_eyebrow">/ Trayectoria</div>
+        <h2 class="sec-title" data-i18n="tray_title">Experiencia y <em>formación</em></h2>
+      </div>
+
+      <div class="tray-download-wrap reveal">
+        <a href="assets/cv/nicolas_vergesio_cv.pdf" class="btn-signal" data-i18n="tray_btn" download>Descargar CV completo <span>↓</span></a>
+      </div>
+
+      <div class="tray-timeline reveal">
+
+        <div class="tray-item">
+          <div class="tray-date" data-i18n="t1_date">Jul 2025<span class="end">→ presente</span></div>
+          <div data-i18n="t1">
+            <div class="tray-role">Doctorando en <em>Bioinformática</em></div>
+            <div class="tray-org">UNQ · Grupo de Bioinformática Estructural · Becario CONICET</div>
+            <ul class="tray-bullets">
+              <li>Desarrollo de pipelines reproducibles en R y Python para el procesamiento de grandes volúmenes de datos genómicos.</li>
+              <li>Herramientas de visualización interactiva (Shiny, Quarto) que aceleran la interpretación de resultados para los investigadores.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tray-item">
+          <div class="tray-date">Jun 2024<span class="end">→ Jul 2025</span></div>
+          <div data-i18n="t2">
+            <div class="tray-role">Analista de <em>datos</em></div>
+            <div class="tray-org">Koppert Argentina</div>
+            <ul class="tray-bullets">
+              <li>Automatización del reporte mensual del CEO regional; centralización en SharePoint y eliminación de procesos manuales en Excel.</li>
+              <li>Flujos ETL en R y SQL para integrar fuentes dispersas y garantizar la integridad de los dashboards en Power BI.</li>
+              <li>Tableros de producción diaria con KPIs logísticos y de calidad para reacción operativa inmediata.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tray-item">
+          <div class="tray-date">Mar 2023<span class="end">→ Jun 2024</span></div>
+          <div data-i18n="t3">
+            <div class="tray-role">Culture Media &amp; <em>Metabolites Specialist</em></div>
+            <div class="tray-org">Stämm Biotech</div>
+            <ul class="tray-bullets">
+              <li>Optimización del rendimiento de bioprocesos mediante análisis estadístico de datos experimentales.</li>
+              <li>Scripts en R y Python para automatizar el control de calidad y reducir el error humano.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tray-edu">
+          <div class="tray-date" style="color:var(--ink-mute);" data-i18n="edu_label">Formación</div>
+          <div class="tray-edu-list" data-i18n="edu_list">
+            <div class="tray-edu-item">
+              <div class="tray-edu-title">Maestría en Bioinformática y Biología de Sistemas</div>
+              <div class="tray-edu-year">2025 · en curso</div>
+            </div>
+            <div class="tray-edu-item">
+              <div class="tray-edu-title">Licenciatura en Biotecnología</div>
+              <div class="tray-edu-year">2015 – 2022</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="drip-band purple" aria-hidden="true"></div>
+
+  <!-- ===== CONTACTO ===== -->
+  <section class="contacto" id="contacto">
+    <div class="container">
+      <div class="contacto-inner reveal">
+        <div>
+          <h2 class="contacto-headline" data-i18n="cont_head">¿Tenés un problema?<br><em>Dejemos que los datos hablen.</em></h2>
+        </div>
+        <div class="contacto-side">
+          <div class="contacto-links">
+            <a href="mailto:nicolas.vergesio@gmail.com" class="contacto-link"><span>Email</span><span class="arr">↗</span></a>
+            <a href="https://www.linkedin.com/in/nicol%C3%A1s-vergesio" class="contacto-link" target="_blank" rel="noopener"><span>LinkedIn</span><span class="arr">↗</span></a>
+            <a href="https://github.com/NicolasVergesio" class="contacto-link" target="_blank" rel="noopener"><span>GitHub</span><span class="arr">↗</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-meta">
+        <div>© 2026 · Nicolás Vergesio</div>
+        <div class="boo">data &amp; bio ☣</div>
+        <div>Buenos Aires · AR</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    function toggleServ(head) {
+      const item = head.parentElement;
+      document.querySelectorAll('.serv-item').forEach(o => { if (o !== item) o.classList.remove('open'); });
+      item.classList.toggle('open');
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ================= TRADUCCIÓN ES / EN =================
+    const EN = {
+      nav_sobre: 'About',
+      nav_serv: 'Services',
+      nav_port: 'Portfolio',
+      nav_tray: 'Experience',
+      nav_cont: 'Contact',
+
+      hero_eyebrow: 'data &amp; bio <span class="rad">☣</span> halloween edition',
+      hero_bio: "I'm a bioinformatician and data analyst. I look for patterns and bring order to the data nobody dares to touch. <em>The result: problems turned into actionable information.</em>",
+      btn_write: 'Get in touch <span>→</span>',
+      btn_port: 'See portfolio <span>→</span>',
+
+      sobre_eyebrow: '/ About',
+      sobre_title: 'A bit of <em>context</em>',
+      sobre_p1: "I help people <em>understand and analyze their information</em>, and automate their reports. Throughout my career I've worked as a data analyst and bioinformatician: cleaning, integrating and shaping scattered sources.",
+      sobre_p2: "I'm drawn to where biology, code and well-framed questions meet. What I do best is take a problem, decode it, and leave it in a state where the best possible decision can be made with the information at hand. Sometimes that's a dashboard, sometimes a pipeline, sometimes an app. <em>Whatever the problem, it gets solved in the end.</em>",
+      sobre_fun: '<span>Fun fact</span> Outside of data, I compose music. Two crafts that, deep down, do the same thing: work with sequences and look for meaning in them.',
+
+      serv_eyebrow: '/ Services',
+      serv_title: 'How I can <em>help</em>',
+      s1_title: 'Data analysis &amp; reporting',
+      s1_body: '<p class="serv-desc">Taking messy data, scattered sources and vague questions, and leaving them <em>in a state where management can make the best actionable decisions</em>. From exploratory analysis to a production dashboard that updates itself.</p><div class="serv-tags"><span class="serv-tag">Cleaning &amp; ETL</span><span class="serv-tag">Dashboards</span><span class="serv-tag">Automated reports</span><span class="serv-tag">Visualization</span></div>',
+      s2_title: 'Automation',
+      s2_body: '<p class="serv-desc">Manual processes that could run on their own. Scripts that replace spreadsheets. ETLs that bring scattered data together. <em>The boring stuff, done right</em>, so time goes into thinking instead of copy-pasting.</p><div class="serv-tags"><span class="serv-tag">ETL</span><span class="serv-tag">Internal apps</span><span class="serv-tag">Data extraction</span><span class="serv-tag">Automated QC</span></div>',
+      s3_title: 'Bioinformatics &amp; science',
+      s3_body: '<p class="serv-desc">I help scientific teams analyze their data, improve reproducibility, automate their pipelines and raise the quality of their figures. I also run programming workshops for data analysis. My specialty is where <em>research, product and analysis</em> meet.</p><div class="serv-tags"><span class="serv-tag">Reproducible pipelines</span><span class="serv-tag">Statistical analysis</span><span class="serv-tag">Paper-ready figures</span><span class="serv-tag">Workshops</span></div>',
+
+      port_title: 'Selected <em>projects</em>',
+      p1: '<div class="proj-meta"><span class="cat">Bioinformatics</span><span>2025</span></div><h3 class="proj-title">R package for <em>tissue specificity</em></h3><p class="proj-desc">A tool to analyze and visualize tissue-specific gene expression patterns, packaged for reproducibility.</p><div class="proj-stack"><span>R</span><span>tidyverse</span><span>ggplot2</span></div>',
+      p2: '<div class="proj-meta"><span class="cat">Dashboards</span><span>2024</span></div><h3 class="proj-title"><em>Automated</em> monthly report</h3><p class="proj-desc">A pipeline that centralizes data from multiple departments and delivers the regional CEO report on the first business day of the month, no Excel involved.</p><div class="proj-stack"><span>R</span><span>SQL</span><span>Power BI</span></div>',
+      p3: '<div class="proj-meta"><span class="cat">Power Apps</span><span>2024</span></div><h3 class="proj-title"><em>Yield &amp; ROI</em> calculator</h3><p class="proj-desc">An internal app that lets the sales team calculate yields in real time while negotiating with clients.</p><div class="proj-stack"><span>Power Apps</span><span>SharePoint</span></div>',
+      p4: '<div class="proj-meta"><span class="cat">Shiny app</span><span>2025</span></div><h3 class="proj-title"><em>Interactive</em> bioprocess explorer</h3><p class="proj-desc">A Shiny app to explore experimental results from culture media optimization, with filters and export.</p><div class="proj-stack"><span>R</span><span>Shiny</span><span>plotly</span></div>',
+      p5: '<div class="proj-meta"><span class="cat">Automation</span><span>2024</span></div><h3 class="proj-title"><em>Automated</em> invoice extraction</h3><p class="proj-desc">An app that pulls data from PDF invoices and loads it into a database. Less admin work, fewer typos.</p><div class="proj-stack"><span>Python</span><span>OCR</span><span>Power Automate</span></div>',
+      p6: '<div class="proj-meta"><span class="cat">PhD</span><span>2025–now</span></div><h3 class="proj-title"><em>Structural bioinformatics</em> pipelines</h3><p class="proj-desc">Reproducible processing of large-scale genomic data for research on protein structure and function.</p><div class="proj-stack"><span>Python</span><span>R</span><span>Docker</span></div>',
+
+      cake_tag: '/ Side project',
+      cake_desc: "My space for sharing bioinformatics and data analysis without the solemnity. Tutorials, notes and experiments where I explain what I'm learning <em>the way I wish it had been explained to me</em>. Under construction, growing little by little.",
+      cake_btn: 'Visit Cakeformatics <span>→</span>',
+
+      tray_eyebrow: '/ Experience',
+      tray_title: 'Experience &amp; <em>education</em>',
+      tray_btn: 'Download full CV <span>↓</span>',
+      t1_date: 'Jul 2025<span class="end">→ present</span>',
+      t1: '<div class="tray-role">PhD candidate in <em>Bioinformatics</em></div><div class="tray-org">UNQ · Structural Bioinformatics Group · CONICET Fellow</div><ul class="tray-bullets"><li>Reproducible R and Python pipelines for processing large volumes of genomic data.</li><li>Interactive visualization tools (Shiny, Quarto) that speed up result interpretation for researchers.</li></ul>',
+      t2: '<div class="tray-role">Data <em>Analyst</em></div><div class="tray-org">Koppert Argentina</div><ul class="tray-bullets"><li>Automated the regional CEO\'s monthly report; centralized data in SharePoint and removed manual Excel processes.</li><li>ETL flows in R and SQL to integrate scattered sources and ensure the integrity of Power BI dashboards.</li><li>Daily production dashboards with logistics and quality KPIs for immediate operational response.</li></ul>',
+      t3: '<div class="tray-role">Culture Media &amp; <em>Metabolites Specialist</em></div><div class="tray-org">Stämm Biotech</div><ul class="tray-bullets"><li>Improved bioprocess yield through statistical analysis of experimental data.</li><li>R and Python scripts to automate quality control and reduce human error.</li></ul>',
+      edu_label: 'Education',
+      edu_list: '<div class="tray-edu-item"><div class="tray-edu-title">MSc in Bioinformatics and Systems Biology</div><div class="tray-edu-year">2025 · ongoing</div></div><div class="tray-edu-item"><div class="tray-edu-title">BSc in Biotechnology</div><div class="tray-edu-year">2015 – 2022</div></div>',
+
+      scratch_hint: 'Scratch to reveal the photo',
+      scratch_reset: '↺ Cover it again',
+
+      cont_head: 'Got a problem?<br><em>Let the data speak.</em>'
+    };
+
+    const ES = {};
+    const i18nEls = document.querySelectorAll('[data-i18n]');
+    i18nEls.forEach(el => { ES[el.dataset.i18n] = el.innerHTML; });
+
+    const langBtn = document.getElementById('langToggle');
+    let currentLang = 'es';
+
+    function setLang(lang) {
+      const dict = lang === 'en' ? EN : ES;
+      i18nEls.forEach(el => {
+        const k = el.dataset.i18n;
+        if (dict[k] !== undefined) el.innerHTML = dict[k];
+      });
+      document.documentElement.lang = lang;
+      currentLang = lang;
+      langBtn.querySelectorAll('[data-l]').forEach(s => s.classList.toggle('on', s.dataset.l === lang));
+      langBtn.setAttribute('aria-label', lang === 'en' ? 'Cambiar a español' : 'Switch to English');
+      try { localStorage.setItem('nv-lang', lang); } catch (e) {}
+    }
+
+    langBtn.addEventListener('click', () => setLang(currentLang === 'es' ? 'en' : 'es'));
+
+    let saved = null;
+    try { saved = localStorage.getItem('nv-lang'); } catch (e) {}
+    if (saved === 'en') setLang('en');
+  </script>
+  <script src="js/scratch.js"></script>
+
+</body>
+</html>
