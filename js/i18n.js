@@ -16,7 +16,7 @@ const EN = {
   sobre_title: 'A bit of <em>context</em>',
   sobre_p1: "I help people <em>understand and analyze their information</em>, and automate their reports. Throughout my career I've worked as a data analyst and bioinformatician: cleaning, integrating and shaping scattered sources.",
   sobre_p2: "I'm drawn to where biology, code and well-framed questions meet. What I do best is take a problem, decode it, and leave it in a state where the best possible decision can be made with the information at hand. Sometimes that's a dashboard, sometimes a pipeline, sometimes an app. <em>Whatever the problem, it gets solved in the end.</em>",
-  sobre_fun: '<span>Fun fact</span> Outside of data, I compose music. Two crafts that, deep down, do the same thing: work with sequences and look for meaning in them.',
+  sobre_fun: '<span><svg class="ff-onda" viewBox="0 0 120 26" aria-hidden="true"><path d="M2 13 L30 13 L37 4 L45 22 L52 13 L84 13 L90 8 L96 18 L102 13 L118 13"/></svg>Fun fact</span> Outside of data, I compose music. Two crafts that, deep down, do the same thing: work with sequences and look for meaning in them.',
 
   serv_eyebrow: '/ Services',
   serv_title: 'How I can <em>help</em>',

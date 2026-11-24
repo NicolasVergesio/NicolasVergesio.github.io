@@ -1,0 +1,53 @@
+/* Hero cordillera — estilos de Nick (cordillera.css), adaptados a la paleta Bera del sitio.
+   Las variables de DESIGN.md se definen acá con los valores que corresponden en este sitio. */
+.cordillera {
+  --c-glaciar: #3F5868;   /* acento del slider */
+  --c-liquen: #8A8A8A;    /* líneas finas */
+  --c-basalto: #333333;   /* línea del promedio */
+  --c-hairline: #E5E5E5;  /* base */
+  --s-4: 24px;
+  --margin-x: 0px;
+}
+
+/* Hero cordillera — usa las variables de :root del DESIGN.md */
+.cordillera {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-4);
+  padding: 0 var(--margin-x);
+}
+.cordillera__slider {
+  align-self: center;
+  width: min(220px, 60vw);
+  accent-color: var(--c-glaciar);
+  opacity: 1;             /* nítido: la suavidad la dan los colores, no la transparencia */
+  cursor: pointer;
+}
+.cordillera__slider:focus-visible { outline: 1px solid var(--c-glaciar); outline-offset: 6px; }
+.cordillera svg { width: 100%; height: auto; display: block; }
+.cordillera .perfil   { fill: none; stroke: var(--c-liquen);  stroke-width: .8; stroke-linejoin: round; opacity: 0; }
+.cordillera .promedio { fill: none; stroke: var(--c-basalto); stroke-width: 2;  stroke-linejoin: round; stroke-linecap: round; }
+.cordillera .base     { stroke: var(--c-hairline); }
+
+/* Dentro del hero: va a la derecha del nombre, sin ocupar toda la pantalla */
+.hero .cordillera { min-height: 0; justify-content: flex-start; }
+
+@media (max-width: 1080px) {
+  .hero .cordillera { position: static; transform: none; translate: none; width: 100%; margin-top: 48px; }
+}
+
+/* Slider apenas más fino: lado elegido en azul glaciar, resto en blanco con borde */
+.cordillera__slider { -webkit-appearance: none; appearance: none; height: 16px; background: transparent; --p: 50%; }
+.cordillera__slider::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 3px; border: 1px solid #C9CED2;
+  background: linear-gradient(to right, #8FA2B0 var(--p), #FFFFFF var(--p));
+}
+.cordillera__slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--c-glaciar); border: 2px solid #FFFFFF; box-sizing: content-box; margin-top: -6px;
+}
+.cordillera__slider::-moz-range-track { height: 6px; border-radius: 3px; border: 1px solid #C9CED2; background: #FFFFFF; }
+.cordillera__slider::-moz-range-progress { height: 6px; border-radius: 3px; background: #8FA2B0; }
+.cordillera__slider::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--c-glaciar); border: 2px solid #FFFFFF; }

@@ -17,3 +17,14 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+
+// Slider de la cordillera: pinta en azul la parte elegida y deja el resto en blanco
+const sliderCord = document.querySelector('.cordillera__slider');
+if (sliderCord) {
+  const pintar = () => {
+    const p = (sliderCord.value - sliderCord.min) / (sliderCord.max - sliderCord.min) * 100;
+    sliderCord.style.setProperty('--p', p + '%');
+  };
+  sliderCord.addEventListener('input', pintar);
+  pintar();
+}
